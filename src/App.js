@@ -8,15 +8,9 @@ import ProductDetails from "./ProductDetails.js";
 import Cart from "./Cart.js";
 
 function App() {
-  const [cart, setCart] = useState(function () {
-    let savedCart = [];
-    try {
-      savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    } catch (error) {
-      savedCart = [];
-    }
-    return savedCart;
-  });
+  const [cart, setCart] = useState(
+    () => JSON.parse(localStorage.getItem("cart")) || []
+  );
 
   useEffect(() => {
     if (cart) {

@@ -3,14 +3,13 @@ import { loadStripe } from "@stripe/stripe-js";
 import Input from "./Input.js";
 import Button from "./Button.js";
 
-const Stripe =
-  "STRIPE-API-KEY";
+const Stripe = "";
 
 // TODO: Replace with your own publishable key
 const stripeLoadedPromise = loadStripe(Stripe);
 
 // 4242424242424242
-export default function Cart({ cart }) {
+export default function Cart({ cart, homeURL }) {
   const totalPrice = cart.reduce(
     (total, product) => total + product.price * product.quantity,
     0
@@ -39,8 +38,8 @@ export default function Cart({ cart }) {
         .redirectToCheckout({
           lineItems: lineItems,
           mode: "payment",
-          successUrl: "https://superm.react-tutorial.app/",
-          cancelUrl: "https://superm.react-tutorial.app/",
+          successUrl: homeURL,
+          cancelUrl: homeURL,
           customerEmail: email,
         })
         .then((response) => {
